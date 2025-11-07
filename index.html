@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart-JalSense-AI-Powered-Irrigation-for-Rajasthan-Farmers</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #0288d1;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    main {
+      margin-top: 40px;
+    }
+    .card {
+      width: 320px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin: 20px auto;
+      padding: 20px;
+      text-align: left;
+    }
+    label, p {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #0288d1;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0277bd;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #e1f5fe;
+      font-weight: bold;
+      color: #01579b;
+    }
+    footer {
+      margin-top: 40px;
+      background: #0288d1;
+      color: white;
+      padding: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>Smart JalSense: AI-Powered Irrigation for Rajasthan Farmers</header>
+
+  <main>
+    <div class="card">
+      <h2>Enter Sensor Data</h2>
+      <label>Soil Moisture (%):</label><br>
+      <input type="number" id="moisture" placeholder="e.g. 35"><br>
+
+      <label>Temperature (°C):</label><br>
+      <input type="number" id="temperature" placeholder="e.g. 30"><br>
+
+      <label>Rainfall Prediction (mm):</label><br>
+      <input type="number" id="rainfall" placeholder="e.g. 5"><br>
+
+      <button onclick="analyzeIrrigation()">Analyze</button>
+
+      <div id="result" class="result" style="display:none;"></div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Smart JalSense | Developed for Rajasthan Farmers 🌾
+  </footer>
+
+  <script>
+    function analyzeIrrigation() {
+      const moisture = parseFloat(document.getElementById('moisture').value);
+      const temp = parseFloat(document.getElementById('temperature').value);
+      const rainfall = parseFloat(document.getElementById('rainfall').value);
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(moisture) || isNaN(temp) || isNaN(rainfall)) {
+        alert('⚠️ Please fill all fields before analyzing.');
+        return;
+      }
+
+      let advice = '';
+      let color = '#e1f5fe';
+
+      if (moisture < 30 && rainfall < 10 && temp > 28) {
+        advice = '🚿 Soil is dry. AI suggests irrigation today for 2 hours.';
+        color = '#b3e5fc';
+      } else if (moisture >= 30 && moisture <= 60 && rainfall < 20) {
+        advice = '✅ Soil moisture is optimal. Light irrigation may be needed.';
+        color = '#c8e6c9';
+      } else if (moisture > 60 || rainfall >= 20) {
+        advice = '🌧️ Rain expected or soil is wet. Irrigation not needed today.';
+        color = '#ffe0b2';
+      } else {
+        advice = '⚙️ Unable to determine. Please verify sensor data.';
+      }
+
+      resultDiv.style.display = 'block';
+      resultDiv.style.background = color;
+      resultDiv.innerHTML = advice;
+    }
+  </script>
+</body>
+</html>
